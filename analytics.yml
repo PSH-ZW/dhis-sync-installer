@@ -32,10 +32,10 @@
 
 
     - name: Run Liquibase migrations 
-      shell: sh /opt/Bahmni-offline/utils/psi-analytics/src/main/resources/liquibase/scripts/run_liquibase_analytics.sh
+      shell: sh /opt/Bahmni-offline/utils/liquibase/scripts/run_liquibase_analytics.sh
 
     - name: Run Liquibase migrations 
-      shell: sh /opt/Bahmni-offline/utils/psi-analytics/src/main/resources/liquibase/scripts/run_liquibase_openmrs.sh
+      shell: sh /opt/Bahmni-offline/utils/liquibase/scripts/run_liquibase_openmrs.sh
 
     - name: Install DHIS RPMs
       yum:
@@ -49,7 +49,7 @@
       replace:
         path: /opt/psi-analytics/psi-analytics/WEB-INF/classes/application.properties
         regexp: 'mrs.datasource.password=.*'
-        replace: 'mrs.datasource.password="{{mrs_password}}"'
+        replace: 'mrs.datasource.password={{mrs_password}}'
     
     - name: Start DHIS services
       shell: service "{{ item }}" start
