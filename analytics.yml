@@ -3,7 +3,7 @@
   hosts: local
   become: yes
   tasks:
-    
+
     #- name: Set password for postgres user
       #shell: psql -Upostgres -c "ALTER USER postgres WITH PASSWORD '"{{ pg_password }}"'"
 
@@ -31,10 +31,10 @@
       shell: psql -Upostgres -c "grant all privileges on database analytics to analytics"
 
 
-    - name: Run Liquibase migrations 
+    - name: Run Liquibase migrations
       shell: sh /opt/Bahmni-offline/utils/liquibase/scripts/run_liquibase_analytics.sh
 
-    - name: Run Liquibase migrations 
+    - name: Run Liquibase migrations
       shell: sh /opt/Bahmni-offline/utils/liquibase/scripts/run_liquibase_openmrs.sh
 
     - name: Install DHIS RPMs
@@ -50,13 +50,13 @@
         path: /opt/psi-analytics/psi-analytics/WEB-INF/classes/application.properties
         regexp: 'mrs.datasource.password=.*'
         replace: 'mrs.datasource.password={{mrs_password}}'
-    
-    - name: Start DHIS services
-      shell: service "{{ item }}" start
-      with_items:
-        - "bahmni-dhis2-integration-service"
-        - "mart-dhis2-sync"
-        - "psi-analytics" 
+
+#    - name: Start DHIS services
+#      shell: service "{{ item }}" start
+#      with_items:
+#        - "bahmni-dhis2-integration-service"
+#        - "mart-dhis2-sync"
+#        - "psi-analytics"
 
     - name: Restart Bahmni services
       shell: bahmni -i local restart
@@ -66,9 +66,9 @@
       with_items:
         - "bahmni-dhis2-integration-service"
         - "mart-dhis2-sync"
-        - "psi-analytics" 
+        - "psi-analytics"
 
-     
+
     - name: Create Metabase directory
       file:
         path: /opt/metabase
