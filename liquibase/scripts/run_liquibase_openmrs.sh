@@ -8,7 +8,7 @@ LIQUIBASE_JAR="${BASEDIR}/../lib/liquibase-core-2.0.5.jar"
 echo "liquibase jar"
 
 DRIVER="com.mysql.jdbc.Driver"
-CREDS="--url=jdbc:mysql://localhost:3306/openmrs --username=root --password=password"
+CREDS="--url=jdbc:mysql://localhost:3306/openmrs --username=root --password=P@ssw0rd"
 CHANGE_LOG_FILE="${BASEDIR}/../changesets/openmrs_liquibase.xml"
 
 java $CHANGE_LOG_TABLE  -jar $LIQUIBASE_JAR --driver=$DRIVER --classpath=$CLASSPATH --logLevel=debug --changeLogFile=$CHANGE_LOG_FILE $CREDS update
