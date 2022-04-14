@@ -61,12 +61,12 @@
     - name: Restart Bahmni services
       shell: bahmni -i local restart
 
-    - name: Restart DHIS services
-      shell: service "{{ item }}" restart
-      with_items:
-        - "bahmni-dhis2-integration-service"
-        - "mart-dhis2-sync"
-        - "psi-analytics"
+#    - name: Restart DHIS services
+#      shell: service "{{ item }}" restart
+#      with_items:
+#        - "bahmni-dhis2-integration-service"
+#        - "mart-dhis2-sync"
+#        - "psi-analytics"
 
 
     - name: Create Metabase directory
