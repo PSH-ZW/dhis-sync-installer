@@ -12,11 +12,13 @@
 
     <changeSet author="vishnu" id="add missing eventRecords for patients ">
         <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                select count(*)
-                from patient
-                where date_created &lt; (select min(date_created) from event_records where category = 'patient');
-            </sqlCheck>
+            <not>
+                <sqlCheck expectedResult="0">
+                    select count(*)
+                    from patient
+                    where date_created &lt; (select min(date_created) from event_records where category = 'patient');
+                </sqlCheck>
+            </not>
         </preConditions>
         <sql>
             INSERT INTO event_records(uuid,title,timestamp,object,uri,category,tags)
@@ -27,11 +29,13 @@
 
     <changeSet author="vishnu" id="add missing eventRecords for programEnrolment">
         <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                select count(*)
-                from patient_program
-                where date_created &lt; (select min(date_created) from event_records where category = 'programenrollment');
-            </sqlCheck>
+            <not>
+                <sqlCheck expectedResult="0">
+                    select count(*)
+                    from patient_program
+                    where date_created &lt; (select min(date_created) from event_records where category = 'programenrollment');
+                </sqlCheck>
+            </not>
         </preConditions>
         <sql>
             INSERT INTO event_records(uuid,title,timestamp,object,uri,category,tags)
@@ -42,11 +46,13 @@
 
     <changeSet author="vishnu" id="add missing eventRecords for Encounter">
         <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                select count(*)
-                from encounter
-                where date_created &lt; (select min(date_created) from event_records where category = 'Encounter');
-            </sqlCheck>
+            <not>
+                <sqlCheck expectedResult="0">
+                    select count(*)
+                    from encounter
+                    where date_created &lt; (select min(date_created) from event_records where category = 'Encounter');
+                </sqlCheck>
+            </not>
         </preConditions>
         <sql>
             INSERT INTO event_records(uuid,title,timestamp,object,uri,category,tags)
