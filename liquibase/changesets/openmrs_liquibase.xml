@@ -56,7 +56,7 @@
         </preConditions>
         <sql>
             INSERT INTO event_records(uuid,title,timestamp,object,uri,category,tags)
-            select uuid(),'Encounter',now(),CONCAT('/openmrs/ws/rest/v1/bahmniencounter/',uuid, '?v=full'),NULL,'Encounter','Encounter'
+            select uuid(),'Encounter',now(),CONCAT('/openmrs/ws/rest/v1/bahmnicore/bahmniencounter/',uuid, '?v=full'),NULL,'Encounter','Encounter'
             from encounter where date_created &lt; (select min(date_created) from event_records where category = 'Encounter');
         </sql>
     </changeSet>
