@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e -x
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-CLASSPATH="${BASEDIR}/../lib/postgresql-9.4-1206-jdbc42.jar:${BASEDIR}/../changesets"
+CLASSPATH="${BASEDIR}/../lib/postgresql-42.3.6.jar:${BASEDIR}/../changesets"
 
 CHANGE_LOG_TABLE="-Dliquibase.databaseChangeLogTableName=liquibasechangelog -Dliquibase.databaseChangeLogLockTableName=liquibasechangeloglock"
 LIQUIBASE_JAR="${BASEDIR}/../lib/liquibase-core-3.5.3.jar"
