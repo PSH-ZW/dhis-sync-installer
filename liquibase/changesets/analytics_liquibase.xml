@@ -605,4 +605,15 @@
             create index idx_viac_form_encounter_id on viac_form(encounter_id);
         </sql>
     </changeSet>
+
+    <changeSet author="vishnu" id="add prep_oi_identifier to patient table">
+        <preConditions>
+            <not>
+                <columnExists tableName="patient" columnName="prep_oi_identifier"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="patient">
+            <column name="prep_oi_identifier" type="varchar"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
