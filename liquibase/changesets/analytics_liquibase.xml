@@ -578,4 +578,42 @@
         </preConditions>
         <addDefaultValue tableName="events_to_sync" columnName="username" defaultValue="superman"/>
     </changeSet>
+
+    <changeSet author="vishnu" id="add missing indexes on form tables">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="idx_art_initial_visit_compulsory_question_1_of_2_encounter_id"/>
+            </not>
+        </preConditions>
+        <sql>
+            create index idx_art_initial_visit_compulsory_question_1_of_2_encounter_id on art_initial_visit_compulsory_question_1_of_2(encounter_id);
+            create index idx_art_initial_visit_compulsory_question_2_of_2_encounter_id on art_initial_visit_compulsory_question_2_of_2(encounter_id);
+            create index idx_assessment_and_plan_encounter_id on assessment_and_plan(encounter_id);
+            create index idx_family_planning_initial_encounter_id on family_planning_initial(encounter_id);
+            create index idx_fp_continuation_encounter_id on fp_continuation(encounter_id);
+            create index idx_fp_counselling_only_encounter_id on fp_counselling_only(encounter_id);
+            create index idx_hiv_self_testing_encounter_id on hiv_self_testing(encounter_id);
+            create index idx_ipv_form_encounter_id on ipv_form(encounter_id);
+            create index idx_ncd_encounter_id on ncd(encounter_id);
+            create index idx_prep_continuation_encounter_id on prep_continuation(encounter_id);
+            create index idx_prep_initial_encounter_id on prep_initial(encounter_id);
+            create index idx_prep_screening_tool_encounter_id on prep_screening_tool(encounter_id);
+            create index idx_provider_hiv_test_counselling_encounter_id on provider_hiv_test_counselling(encounter_id);
+            create index idx_referrals_template_encounter_id on referrals_template(encounter_id);
+            create index idx_sti_symptoms_encounter_id on sti_symptoms(encounter_id);
+            create index idx_tb_screening_and_history_encounter_id on tb_screening_and_history(encounter_id);
+            create index idx_viac_form_encounter_id on viac_form(encounter_id);
+        </sql>
+    </changeSet>
+
+    <changeSet author="vishnu" id="add prep_oi_identifier to patient table">
+        <preConditions>
+            <not>
+                <columnExists tableName="patient" columnName="prep_oi_identifier"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="patient">
+            <column name="prep_oi_identifier" type="varchar"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
