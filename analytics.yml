@@ -2,11 +2,8 @@
 - name: PSI-analytics
   hosts: local
   become: yes
-  tasks:
-
-    #- name: Set password for postgres user
-      #shell: psql -Upostgres -c "ALTER USER postgres WITH PASSWORD '"{{ pg_password }}"'"
-
+  tasks:   
+    
     - name: Create analytics Database
       become: true
       postgresql_db:
@@ -14,15 +11,12 @@
         state: present
         login_user: postgres
         login_host: 127.0.0.1
-        #login_password: "{{ pg_password }}"
-
 
     - name: Create user analytics
       postgresql_user:
         db: analytics
         login_user: postgres
         login_host: 127.0.0.1
-        #login_password: "{{ pg_password }}"
         name: analytics
         password: password
         priv: ALL
@@ -32,50 +26,140 @@
 
 
     - name: Run Liquibase migrations
-      shell: sh /opt/Bahmni-offline/utils/liquibase/scripts/run_liquibase_analytics.sh
+      shell: sh /opt/Bahmni-offline/utils/dhis-sync-installer/liquibase/scripts/run_liquibase_analytics.sh
 
     - name: Run Liquibase migrations
-      shell: sh /opt/Bahmni-offline/utils/liquibase/scripts/run_liquibase_openmrs.sh
+      shell: sh /opt/Bahmni-offline/utils/dhis-sync-installer/liquibase/scripts/run_liquibase_openmrs.sh
 
     - name: Install DHIS RPMs
       yum:
         name: "{{ item }}"
       with_items:
-        - "/opt/Bahmni-offline/utils/DHIS/bahmni-dhis2-integration-service-1.1.0-1.noarch.rpm"
-        - "/opt/Bahmni-offline/utils/DHIS/mart-dhis2-sync-1.0.0-1.noarch.rpm"
-        - "/opt/Bahmni-offline/utils/DHIS/psi-analytics-0.1-1.noarch.rpm"
+        - "/opt/Bahmni-offline/utils/dhis-sync-installer/DHIS/bahmni-dhis2-integration-service-1.1.0-1.noarch.rpm"
+        - "/opt/Bahmni-offline/utils/dhis-sync-installer/DHIS/mart-dhis2-sync-1.0.0-1.noarch.rpm"
+        - "/opt/Bahmni-offline/utils/dhis-sync-installer/DHIS/psi-analytics-0.1-1.noarch.rpm"
+
+    - name: Set country.org.unit.id
+      replace:
+        path: /opt/bahmni-dhis2-integration-service/etc/bahmni-dhis.conf
+        regexp: 'export DHIS_URI=.*'
+        replace: 'export DHIS_URI={{DHIS_url}}' 
 
     - name: Set password for psi-analytics
       replace:
-        path: /opt/psi-analytics/psi-analytics/WEB-INF/classes/application.properties
-        regexp: 'mrs.datasource.password=.*'
-        replace: 'mrs.datasource.password={{mrs_password}}'
+        path: /opt/psi-analytics/etc/psi-analytics.conf
+        regexp: 'export OPENMRS_DB_PASSWORD=.*'
+        replace: 'export OPENMRS_DB_PASSWORD={{mrs_password}}'
 
-    - name: Start DHIS services
-      shell: service "{{ item }}" start
-      with_items:
-        - "bahmni-dhis2-integration-service"
+    - name: Set country.org.unit.for.orgunit.sync
+      replace:
+        path: /opt/psi-analytics/etc/psi-analytics.conf
+        regexp: 'export COUNTRY_ORG_UNIT=.*'
+        replace: 'export COUNTRY_ORG_UNIT="{{org_unit_id}}"'
 
-    - name: Restart Bahmni services
-      shell: bahmni -i local restart
+    - name: Set country.org.unit.id
+      replace:
+        path: /opt/mart-dhis2-sync/etc/mart-dhis.conf
+        regexp: 'export COUNTRY_ORG_UNIT=.*'
+        replace: 'export COUNTRY_ORG_UNIT="{{org_unit_id}}"' 
 
-    - name: Restart DHIS services
-      shell: service "{{ item }}" restart
-      with_items:
-        - "bahmni-dhis2-integration-service"
+    - name: Set DHIS URL
+      replace:
+        path: /opt/mart-dhis2-sync/etc/mart-dhis.conf
+        regexp: 'export DHIS_URI=.*'
+        replace: 'export DHIS_URI={{DHIS_url}}'
 
+    - name: Set DHIS User
+      replace:
+        path: /opt/mart-dhis2-sync/etc/mart-dhis.conf
+        regexp: 'export DHIS_USER=.*'
+        replace: 'export DHIS_USER={{DHIS_user}}'
+
+    - name: Set DHIS Pass
+      replace:
+        path: /opt/mart-dhis2-sync/etc/mart-dhis.conf
+        regexp: 'export DHIS_PASSWORD=.*'
+        replace: 'export DHIS_PASSWORD=={{DHIS_pass}}'
+
+    - name: Enable DHIS rpm's on boot
+      shell: |
+        chkconfig psi-analytics on
+        chkconfig mart-dhis2-sync on
+        chkconfig bahmni-dhis2-integration-service on
 
     - name: Create Metabase directory
       file:
-        path: /opt/metabase
+        path: /opt/metabase/bin
         state: directory
+
+    - name: Create Metabase conf directory
+      file:
+        path: /etc/metabase
+        state: directory
+
+    - name: Create Metabase log file & directory
+      shell: |
+        mkdir /var/log/metabase
+        touch /var/log/metabase/metabase.log
 
     - name: Copy metabase.jar file
       copy:
         src: /opt/Bahmni-offline/utils/metabase/metabase.jar
         dest: /opt/metabase/
 
-    #- name: Install Metabase
-      #shell: |
-        #cd /opt/metabase
-        #java -jar metabase.jar
+    - name: Copy start script
+      copy: 
+        src: /opt/Bahmni-offline/utils/metabase/start.sh
+        dest: /opt/metabase/bin/
+
+    - name: Create Metabase Database
+      become: true
+      postgresql_db:
+        name: metabase
+        state: present
+        login_user: postgres
+        login_host: 127.0.0.1
+
+
+    - name: Create metabase_user
+      postgresql_user:
+        db: analytics
+        login_user: postgres
+        login_host: 127.0.0.1
+        name: metabase_user
+        password: password
+        priv: ALL
+
+    - name: Grant all privileges on Metabase db to metabase user
+      shell: psql -Upostgres -c "grant all privileges on database metabase to metabase_user"
+
+    - name: Copy metabase.conf
+      copy:
+        src: /opt/Bahmni-offline/utils/metabase/metabase.conf
+        dest: /etc/metabase/
+
+    - name: Copy metabase.service
+      copy:
+        src: /opt/Bahmni-offline/utils/metabase/metabase.service
+        dest: /etc/systemd/system/
+
+    - name: Copy metabase_ssl.conf
+      copy:
+        src: /opt/Bahmni-offline/utils/metabase/metabase_ssl.conf
+        dest: /etc/httpd/conf.d/
+
+    #- name: Reload daemon
+      #shell: systemctl daemon-reload
+
+    #- name: Restart Bahmni services
+      #shell: bahmni -i local restart
+
+    - name: Start DHIS services
+      shell: service "{{ item }}" restart
+      with_items:
+        - "bahmni-dhis2-integration-service"
+        - "psi-analytics"
+
+    - name: Start and enable Metabase 
+      shell: systemctl enable metabase.service
+

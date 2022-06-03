@@ -1,0 +1,77 @@
+---
+- name: Analytics-update
+  hosts: local
+  become: yes
+  tasks:
+
+    - name: Run Liquibase migrations for analytics
+      shell: sh /opt/Bahmni-offline/utils/dhis-sync-installer/liquibase/scripts/run_liquibase_analytics.sh
+
+    - name: Run Liquibase migrations for openmrs
+      shell: sh /opt/Bahmni-offline/utils/dhis-sync-installer/liquibase/scripts/run_liquibase_openmrs.sh
+
+    - name: Remove existing DHIS RPMs
+      yum:
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - "bahmni-dhis2-integration-service-1.1.0-1.noarch"
+        - "mart-dhis2-sync-1.0.0-1.noarch"
+        - "psi-analytics-0.1-1.noarch"
+
+    - name: Install DHIS RPMs
+      yum:
+        name: "{{ item }}"
+      with_items:
+        - "/opt/Bahmni-offline/utils/dhis-sync-installer/DHIS/bahmni-dhis2-integration-service-1.1.0-1.noarch.rpm"
+        - "/opt/Bahmni-offline/utils/dhis-sync-installer/DHIS/mart-dhis2-sync-1.0.0-1.noarch.rpm"
+        - "/opt/Bahmni-offline/utils/dhis-sync-installer/DHIS/psi-analytics-0.1-1.noarch.rpm"
+
+    - name: Set DHIS_url in bahmni-dhis.conf
+      replace:
+        path: /opt/bahmni-dhis2-integration-service/etc/bahmni-dhis.conf
+        regexp: 'export DHIS_URI=.*'
+        replace: 'export DHIS_URI={{DHIS_url}}' 
+
+    - name: Set password for psi-analytics
+      replace:
+        path: /opt/psi-analytics/etc/psi-analytics.conf
+        regexp: 'export OPENMRS_DB_PASSWORD=.*'
+        replace: 'export OPENMRS_DB_PASSWORD={{mrs_password}}'
+
+    - name: Set country.org.unit in psi-analytics.conf
+      replace:
+        path: /opt/psi-analytics/etc/psi-analytics.conf
+        regexp: 'export COUNTRY_ORG_UNIT=.*'
+        replace: 'export COUNTRY_ORG_UNIT="{{org_unit_id}}"'
+
+    - name: Set country.org.unit.id in mart-dhis.conf
+      replace:
+        path: /opt/mart-dhis2-sync/etc/mart-dhis.conf
+        regexp: 'export COUNTRY_ORG_UNIT=.*'
+        replace: 'export COUNTRY_ORG_UNIT="{{org_unit_id}}"' 
+
+    - name: Set DHIS URL
+      replace:
+        path: /opt/mart-dhis2-sync/etc/mart-dhis.conf
+        regexp: 'export DHIS_URI=.*'
+        replace: 'export DHIS_URI={{DHIS_url}}'
+
+    - name: Set DHIS User
+      replace:
+        path: /opt/mart-dhis2-sync/etc/mart-dhis.conf
+        regexp: 'export DHIS_USER=.*'
+        replace: 'export DHIS_USER={{DHIS_user}}'
+
+    - name: Set DHIS Pass
+      replace:
+        path: /opt/mart-dhis2-sync/etc/mart-dhis.conf
+        regexp: 'export DHIS_PASSWORD=.*'
+        replace: 'export DHIS_PASSWORD=={{DHIS_pass}}'
+
+    - name: Enable DHIS rpm's on boot
+      shell: |
+        chkconfig psi-analytics on
+        chkconfig mart-dhis2-sync on
+        chkconfig bahmni-dhis2-integration-service on
+
