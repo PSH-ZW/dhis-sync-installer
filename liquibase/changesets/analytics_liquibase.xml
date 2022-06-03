@@ -452,7 +452,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="add unique constraint on patient_id in patient table" author="vishnu">
+    <changeSet id="add uniqueConstraint on patient_id in patient table" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <and>
                  <columnExists columnName="patient_id" tableName="patient"/>
