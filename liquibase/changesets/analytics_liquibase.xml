@@ -454,7 +454,10 @@
 
     <changeSet id="add unique constraint on patient_id in patient table" author="vishnu">
         <preConditions onFail="MARK_RAN">
-            <columnExists columnName="patient_id" tableName="patient"/>
+            <and>
+                 <columnExists columnName="patient_id" tableName="patient"/>
+                <not><indexExists indexName="patient_patient_id_key"/></not>
+            </and>
         </preConditions>
         <addUniqueConstraint tableName="patient" columnNames="patient_id"/>
     </changeSet>
