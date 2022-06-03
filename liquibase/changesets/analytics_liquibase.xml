@@ -609,8 +609,8 @@
         </sql>
     </changeSet>
 
-    <changeSet author="vishnu" id="add prep_oi_identifier to patient table">
-        <preConditions>
+    <changeSet author="vishnu" id="add prep_oi_identifier to patient table ">
+        <preConditions onFail="MARK_RAN">
             <not>
                 <columnExists tableName="patient" columnName="prep_oi_identifier"/>
             </not>
