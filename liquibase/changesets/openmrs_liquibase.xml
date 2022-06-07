@@ -117,4 +117,46 @@
         </sql>
     </changeSet>
 
+    <changeSet author="vishnu" id="add missing shortnames for all offline concepts">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_name
+                where concept_name_type = 'FULLY_SPECIFIED'
+                and concept_id not in (select concept_id from concept_name where concept_name_type = 'SHORT' and voided = 0);
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            insert into concept_name(uuid, concept_id, name, locale, creator, date_created, concept_name_type, voided)
+            select uuid(), concept_id, name, 'en', 1, now(), 'SHORT', 0
+            from concept_name where concept_name_type = 'FULLY_SPECIFIED'
+            and concept_id not in (select concept_id from concept_name where concept_name_type = 'SHORT' and voided = 0);
+        </sql>
+    </changeSet>
+
+    <changeSet author="vishnu" id="add eventrecords for forms">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from event_records where category = 'forms';
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            insert into event_records(uuid, uri, object, category)
+            select uuid(),  CONCAT('/openmrs/ws/rest/v1/form/' , uuid , '?v=custom:(resources:(value),name,version,uuid)'), CONCAT('/openmrs/ws/rest/v1/form/' , uuid , '?v=custom:(resources:(value),name,version,uuid)'), 'forms'
+            from form order by version;
+        </sql>
+    </changeSet>
+
+    <changeSet author="vishnu" id="add missing event_log for forms">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from event_log where category = 'forms';
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            insert into event_log(uuid, object, category)
+            select uuid(), CONCAT('/openmrs/ws/rest/v1/form/' , uuid , '?v=custom:(resources:(value),name,version,uuid)'), 'forms'
+            from form order by version;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
