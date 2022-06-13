@@ -174,5 +174,31 @@
         </sql>
     </changeSet>
 
+    <changeSet author="vishnu" id="delete synonyms for Yes concept">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where concept_id = 2146 and concept_name_type is null;
+                </sqlCheck>
+            </not>
+        </preConditions>
+        <sql>
+            delete from concept_name where concept_id = 2146 and concept_name_type is null;
+        </sql>
+    </changeSet>
+
+    <changeSet author="vishnu" id="delete synonyms for No concept">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where concept_id = 2147 and concept_name_type is null;
+                </sqlCheck>
+            </not>
+        </preConditions>
+        <sql>
+            delete from concept_name where concept_id = 2147 and concept_name_type is null;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
 
