@@ -174,29 +174,29 @@
         </sql>
     </changeSet>
 
-    <changeSet author="vishnu" id="delete synonyms for Yes concept">
+    <changeSet author="vishnu" id="void synonyms for Yes concept">
         <preConditions onFail="MARK_RAN">
             <not>
                 <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where concept_id = 2146 and concept_name_type is null;
+                    select count(*) from concept_name where concept_id = 2146 and concept_name_type is null and voided = 0;
                 </sqlCheck>
             </not>
         </preConditions>
         <sql>
-            delete from concept_name where concept_id = 2146 and concept_name_type is null;
+            update concept_name set voided = 1 where concept_id = 2146 and concept_name_type is null and voided = 0;
         </sql>
     </changeSet>
 
-    <changeSet author="vishnu" id="delete synonyms for No concept">
+    <changeSet author="vishnu" id="void synonyms for No concept">
         <preConditions onFail="MARK_RAN">
             <not>
                 <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where concept_id = 2147 and concept_name_type is null;
+                    select count(*) from concept_name where concept_id = 2147 and concept_name_type is null and voided = 0;
                 </sqlCheck>
             </not>
         </preConditions>
         <sql>
-            delete from concept_name where concept_id = 2147 and concept_name_type is null;
+            update concept_name set voided = 1 where concept_id = 2147 and concept_name_type is null and voided = 0;
         </sql>
     </changeSet>
 
