@@ -159,4 +159,20 @@
         </sql>
     </changeSet>
 
+    <changeSet author="vishnu" id="delete logs for removed concepts">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sqlCheck expectedResult="0">
+                    select count(*) from event_log where category = 'offline-concepts' and (select count(*)
+                    from concept where uuid = (select substr(object, 29, 36))) = 0;
+                </sqlCheck>
+            </not>
+        </preConditions>
+        <sql>
+            delete from event_log where category = 'offline-concepts' and (select count(*)
+            from concept where uuid = (select substr(object, 29, 36))) = 0;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
+
