@@ -200,5 +200,11 @@
         </sql>
     </changeSet>
 
+    <changeSet author="vishnu" id="set filter as null for addressHierarchy event_logs">
+        <sql>
+            update event_log set filter = null where category = 'addressHierarchy';
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
 
