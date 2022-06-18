@@ -252,6 +252,47 @@
             select insert_form('Art initial Visit compulsory Question 1 of 2', '2', 'c77bba7e-79ed-4c75-8162-9c090b1c5676');
         </sql>
     </changeSet>
-
+    <changeSet id="PSI-CONFIG-2022061601" author="Rony">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) from person_attribute_type where name = 'Cluster Name';
+            </sqlCheck>
+        </preConditions>
+        <comment>Add person attribute - cluster name</comment>
+        <sql>
+            insert into person_attribute_type ( name, description, format,creator, date_created,uuid) values("Cluster Name", "Cluster Name","java.lang.String",1, now(),"5e139545-8430-43ce-a172-40634107eab8");
+        </sql>
+    </changeSet>
+    <changeSet id="PSI-CONFIG-2022061602" author="Rony">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT count(*) from person_attribute_type where name = 'email' and retired = false;
+            </sqlCheck>
+        </preConditions>
+        <comment>Retire person attribute - email</comment>
+        <sql>
+            update person_attribute_type set retired = true, retired_by =4, retire_reason = "Replaced with cluster name", date_retired=now() where name = 'email';
+        </sql>
+    </changeSet>
+    <changeSet author="rony" id="Add privilege bypassRetrospectiveDateThreshold">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from privilege where privilege = 'bypassRetrospectiveDateThreshold'
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            insert into privilege(privilege,description,uuid) values('bypassRetrospectiveDateThreshold', 'Bypass retrospective data entry date threshold', 'ff914948-eb15-4a8a-8b5d-b0bf3df2b169')
+        </sql>
+    </changeSet>
+    <changeSet author="rony" id="Add privilege allowDashboardFormsEditn">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from privilege where privilege = 'allowDashboardFormsEdit'
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            insert into privilege(privilege,description,uuid) values('allowDashboardFormsEdit', 'Allow edit in dashboard forms', '2f460c90-23d1-41ee-86f3-ec9dd3c37f42')
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
