@@ -206,5 +206,52 @@
         </sql>
     </changeSet>
 
+    <changeSet author="vishnu" id="Update sync strategy from Selective to ID based.">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                select count(*) from global_property where property = 'bahmniOfflineSync.strategy';
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            update global_property set property_value = 'org.bahmni.module.bahmniOfflineSync.strategy.IDBasedSyncStrategy' where property = 'bahmniOfflineSync.strategy';
+        </sql>
+    </changeSet>
+
+    <changeSet author="vishnu" id="Create function to insert new forms">
+        <sqlFile path="../sql_files/form_insert_function.sql" endDelimiter="\nGO" stripComments="false" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet author="vishnu" id="Insert newly edited forms and form resources">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from form where version > 1;
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            select insert_form('Art initial Visit compulsory Question 2 of 2', '2', '308b1e40-06ff-4ae7-a6b6-84fa7b7beebd');
+            select insert_form('STI Symptoms', '2', '7c14ed1f-c2eb-45f1-b086-40508127dc0d');
+            select insert_form('General', '2', 'a2d643fe-e557-4aaf-aa37-ee85663e10b7');
+            select insert_form('ART Observations', '2', 'c2ac0e33-3f7f-4391-89ff-0a813d6b860f');
+            select insert_form('Assessment and Plan', '2', 'ace0685e-29a2-4b19-8052-bb6f2c4fb4b4');
+            select insert_form('ART Continuation', '2', '8ba70013-0d04-42fb-aa79-6c494f4b9768');
+            select insert_form('General Screening Form', '1', '6c18adeb-50aa-433b-9106-35931524a0c3');
+            select insert_form('FP Continuation', '2', '07892117-51a6-4602-a95a-ee044a4e3341');
+            select insert_form('IPV Form', '2', 'f312414e-fa51-49c2-976c-e6d01cd5d15a');
+            select insert_form('NCD', '2', '929a9c26-49c6-40a9-86bd-439cfacbce17');
+            select insert_form('PrEP Continuation', '2', '11f5b3ea-775b-498b-bd03-0246a90326a0');
+            select insert_form('PrEP Initial', '2', '9c03eb79-804a-4a32-ab9b-8dfad3169403');
+            select insert_form('PrEP Screening Tool', '2', 'c2baa6ea-ef64-42d1-9e04-fe0c83ad8429');
+            select insert_form('Provider HIV test counselling', '2', 'aa2b6048-2c04-4289-8124-4b47cf402be0');
+            select insert_form('Referrals Template', '2', '99541d20-54a4-4717-b2a9-9f2bac7c88ce');
+            select insert_form('TB Prevention and Treatment', '1', '773e3707-a416-4b9d-a5aa-b40f756f1a0c');
+            select insert_form('TB Screening and History', '2', 'b87accd1-2906-4284-aa02-0d1520dd3e68');
+            select insert_form('VIAC Form', '2', '2b2ce5ee-46fd-4ac8-9a16-c704de058ee3');
+            select insert_form('HIV Self Testing', '2', '09d26da0-8d1a-4284-aea3-1de8e2bf3a78');
+            select insert_form('Family Planning Initial', '2', 'c8fec49e-fda6-4837-b867-0104393b1ac2');
+            select insert_form('FP Counselling Only', '2', '7946d29c-22c1-4f5d-80ec-85a52e6e6d04');
+            select insert_form('Art initial Visit compulsory Question 1 of 2', '2', 'c77bba7e-79ed-4c75-8162-9c090b1c5676');
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
 
