@@ -550,24 +550,6 @@
         </addColumn>
     </changeSet>
 
-    <changeSet author="vishnu" id="import mapping table">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="mapping"/>
-            </not>
-        </preConditions>
-        <sqlFile dbms="postgresql" path="../sql_files/mapping.sql" relativeToChangelogFile="true"/>
-    </changeSet>
-
-    <changeSet author="vishnu" id="import orgunit_tracker table">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="orgunit_tracker"/>
-            </not>
-        </preConditions>
-        <sqlFile dbms="postgresql" path="../sql_files/orgunit_tracker.sql" relativeToChangelogFile="true"/>
-    </changeSet>
-
     <changeSet author="vishnu" id="add default value of false to events_to_sync">
         <preConditions onFail="MARK_RAN">
             <columnExists tableName="events_to_sync" columnName="synced"/>
@@ -618,5 +600,19 @@
         <addColumn tableName="patient">
             <column name="prep_oi_identifier" type="varchar"/>
         </addColumn>
+    </changeSet>
+    <changeSet author="vishnu" id="update mappings table">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="mapping"/>
+        </preConditions>
+        <dropTable tableName="mapping"/>
+        <sqlFile dbms="postgresql" path="../sql_files/mapping.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet author="vishnu" id="update orgunit_tracker table">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="orgunit_tracker"/>
+        </preConditions>
+        <dropTable tableName="orgunit_tracker"/>
+        <sqlFile dbms="postgresql" path="../sql_files/orgunit_tracker.sql" relativeToChangelogFile="true"/>
     </changeSet>
 </databaseChangeLog>
