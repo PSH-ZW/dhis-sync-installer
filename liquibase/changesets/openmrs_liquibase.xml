@@ -117,13 +117,15 @@
         </sql>
     </changeSet>
 
-    <changeSet author="vishnu" id="add missing shortnames for all offline concepts">
+    <changeSet author="vishnu" id="add missing shortnames for all concepts for offline sync">
         <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                select count(*) from concept_name
-                where concept_name_type = 'FULLY_SPECIFIED'
-                and concept_id not in (select concept_id from concept_name where concept_name_type = 'SHORT' and voided = 0);
-            </sqlCheck>
+            <not>
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name
+                    where concept_name_type = 'FULLY_SPECIFIED'
+                    and concept_id not in (select concept_id from concept_name where concept_name_type = 'SHORT' and voided = 0);
+                </sqlCheck>
+            </not>
         </preConditions>
         <sql>
             insert into concept_name(uuid, concept_id, name, locale, creator, date_created, concept_name_type, voided)
