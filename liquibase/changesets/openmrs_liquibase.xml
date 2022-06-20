@@ -230,7 +230,7 @@
             </sqlCheck>
         </preConditions>
         <sql>
-            select insert_form('ART Continuation', '1', '30599a4a-b329-4b2c-a06c-6eccd14b9857');
+            select insert_form('ART Continuation', '1', '18a60043-9af1-44f8-802b-9ec7078e967e');
             select insert_form('STI Diagnosis and Treatment', '1', 'f83f1721-3987-4f74-80e3-ab34447acbb2');
             select insert_form('TB Prevention and Treatment', '1', 'eb414ea8-9a6e-433c-bcdf-d9c9c6994099');
             select insert_form('ART Initiation', '1', '3a56449e-aa32-4a3e-88e1-bf303c889809');
@@ -250,9 +250,9 @@
             select insert_form('PrEP Continuation', '2', 'f0d826c1-df5a-4500-91fc-61e520ff10f3');
             select insert_form('Provider HIV test counselling', '2', '7baabc66-16df-4715-b5b5-d4f4fb027c61');
             select insert_form('VIAC Form', '2', 'b05ebbc8-4100-4bbb-9187-fb8715d3c668');
-            select insert_form('FP Counselling Only', '2', '9c595614-2d34-483c-9953-f5c78a0411af');
-            select insert_form('Referrals Template', '2', 'bba1e810-2ddb-481a-a08c-92eb98280b6a');
-            select insert_form('FP Continuation', '2', '43aa5e26-7c99-464b-9439-9c1b26b106d1');
+            select insert_form('FP Counselling Only', '2', '11eab7e3-ed72-4441-bdaa-e2512c90ce42');
+            select insert_form('Referrals Template', '2', '81588470-2cfb-4722-af44-a20ff3681f67');
+            select insert_form('FP Continuation', '2', 'ba0b0df1-22f0-4f8a-8a38-6bbee6f12fbe');
             select insert_form('Family Planning Initial', '2', '9534b9b8-e68c-4930-8f4a-c9ac8bf72c72');
             select insert_form('PrEP Initial', '2', '2afd4f7a-8509-444c-a596-25310863a68a');
         </sql>
