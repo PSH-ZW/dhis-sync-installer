@@ -252,6 +252,31 @@
             select insert_form('Art initial Visit compulsory Question 1 of 2', '2', 'c77bba7e-79ed-4c75-8162-9c090b1c5676');
         </sql>
     </changeSet>
+
+    <changeSet author="vishnu" id="Change version for ART Continuation">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                select count(*) from form where name = 'ART Continuation';
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            update form set version = '1' where uuid = '8ba70013-0d04-42fb-aa79-6c494f4b9768'
+        </sql>
+    </changeSet>
+
+    <changeSet author="vishnu" id="Add missing forms">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from form where name = 'ART Initiation';
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            select insert_form('ART Initiation', '1', 'ada0ad64-c1be-4f27-9f04-ae9483e73106');
+            select insert_form('STI Diagnosis and Treatment', '1', 'f6867f0e-1983-4f73-8f91-770d3fd743f3');
+        </sql>
+    </changeSet>
+
+
     <changeSet id="PSI-CONFIG-2022061601" author="Rony">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
