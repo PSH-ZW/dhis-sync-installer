@@ -601,6 +601,7 @@
             <column name="prep_oi_identifier" type="varchar"/>
         </addColumn>
     </changeSet>
+
     <changeSet author="vishnu" id="drop mappings table if exists">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="mapping"/>
