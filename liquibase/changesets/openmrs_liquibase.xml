@@ -326,5 +326,9 @@
             insert into privilege(privilege,description,uuid) values('allowDashboardFormsEdit', 'Allow edit in dashboard forms', '2f460c90-23d1-41ee-86f3-ec9dd3c37f42')
         </sql>
     </changeSet>
+
+    <changeSet author="vishnu" id = "update get_concept_name function">
+        <sqlFile path="../sql_files/updated_get_concept_name.sql" endDelimiter="\nGO" stripComments="false" relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>
 
