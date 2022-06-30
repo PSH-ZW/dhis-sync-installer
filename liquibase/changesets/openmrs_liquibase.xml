@@ -204,31 +204,26 @@
             </sqlCheck>
         </preConditions>
         <sql>
-            select insert_form('ART Continuation', '1', '559a3d4d-55fb-4d40-9bc0-588e36827915');
-            select insert_form('STI Diagnosis and Treatment', '1', 'f83f1721-3987-4f74-80e3-ab34447acbb2');
-            select insert_form('TB Prevention and Treatment', '1', '058b40e3-b077-43ba-94c3-fe7709025ba3');
-            select insert_form('ART Initiation', '1', '3a56449e-aa32-4a3e-88e1-bf303c889809');
-            select insert_form('General Screening Form', '1', '68e384c1-450f-4a51-81f1-b71f47cdcbd6');
-
-            select insert_form('Art initial Visit compulsory Question 2 of 2', '2', '308b1e40-06ff-4ae7-a6b6-84fa7b7beebd');
-            select insert_form('STI Symptoms', '2', '7c14ed1f-c2eb-45f1-b086-40508127dc0d');
+            select insert_form('General Screening Form', '1', 'b62444e4-ffc9-4aba-838b-8e3cfda2ae2d');
+            select insert_form('Art initial Visit compulsory Question 2 of 2', '2', '995c9405-ed38-477a-a188-36390daa1a12');
+            select insert_form('STI Symptoms', '2', 'e47ff817-9272-488a-b619-abc8f41a4d85');
             select insert_form('General', '2', 'a2d643fe-e557-4aaf-aa37-ee85663e10b7');
             select insert_form('ART Observations', '2', 'c2ac0e33-3f7f-4391-89ff-0a813d6b860f');
-            select insert_form('Assessment and Plan', '2', 'ace0685e-29a2-4b19-8052-bb6f2c4fb4b4');
+            select insert_form('Assessment and Plan', '2', '869e8ec7-fca1-4432-a068-8754fbcfe4ae');
             select insert_form('NCD', '2', '929a9c26-49c6-40a9-86bd-439cfacbce17');
             select insert_form('PrEP Screening Tool', '2', 'c2baa6ea-ef64-42d1-9e04-fe0c83ad8429');
-            select insert_form('TB Screening and History', '2', 'b87accd1-2906-4284-aa02-0d1520dd3e68');
+            select insert_form('TB Screening and History', '2', 'f4819587-48cd-40d8-86c6-88bb8ee5ba3d');
             select insert_form('Art initial Visit compulsory Question 1 of 2', '2', 'c77bba7e-79ed-4c75-8162-9c090b1c5676');
             select insert_form('HIV Self Testing', '2', '0a89eb93-2dd2-4dc6-b53a-f03fe083b32a');
-            select insert_form('IPV Form', '2', 'b39cb14a-66f9-4222-ba1e-654bb1a6bf6d');
+            select insert_form('IPV Form', '2', '0b15fb13-d440-4410-b2d5-aa0b487de7dd');
             select insert_form('PrEP Continuation', '2', 'f0d826c1-df5a-4500-91fc-61e520ff10f3');
-            select insert_form('Provider HIV test counselling', '2', '19b38138-5344-4dec-9473-8f4377233c0e');
+            select insert_form('Provider HIV test counselling', '2', 'ea2020d9-f196-45db-bffa-78f570eaaaa6');
             select insert_form('VIAC Form', '2', '0e4ea5bc-d40c-4a72-9a54-01511fab8113');
-            select insert_form('FP Counselling Only', '2', 'c539e19d-186a-4f61-a61b-a7ce742a62b1');
+            select insert_form('FP Counselling Only', '2', '51b2ee80-876e-41a3-8d12-223cfad40482');
             select insert_form('Referrals Template', '2', '81588470-2cfb-4722-af44-a20ff3681f67');
-            select insert_form('FP Continuation', '2', 'ba0b0df1-22f0-4f8a-8a38-6bbee6f12fbe');
+            select insert_form('FP Continuation', '2', 'b5e58c9d-1007-4efd-b27f-455648f5a3cd');
             select insert_form('Family Planning Initial', '2', '9534b9b8-e68c-4930-8f4a-c9ac8bf72c72');
-            select insert_form('PrEP Initial', '2', '2afd4f7a-8509-444c-a596-25310863a68a');
+            select insert_form('PrEP Initial', '2', '7f8ccf79-12af-4217-80eb-a8f57df7118d');
         </sql>
     </changeSet>
 
@@ -267,19 +262,6 @@
         <sql>
             insert into event_records(uuid, uri, object, category)
             select uuid(),  CONCAT('/openmrs/ws/rest/v1/form/' , uuid , '?v=custom:(resources:(value),name,version,uuid)'), CONCAT('/openmrs/ws/rest/v1/form/' , uuid , '?v=custom:(resources:(value),name,version,uuid)'), 'forms'
-            from form order by version;
-        </sql>
-    </changeSet>
-
-    <changeSet author="vishnu" id="add missing event_log for new forms">
-        <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                select count(*) from event_log where category = 'forms';
-            </sqlCheck>
-        </preConditions>
-        <sql>
-            insert into event_log(uuid, object, category)
-            select uuid(), CONCAT('/openmrs/ws/rest/v1/form/' , uuid , '?v=custom:(resources:(value),name,version,uuid)'), 'forms'
             from form order by version;
         </sql>
     </changeSet>
