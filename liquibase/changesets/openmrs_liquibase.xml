@@ -10,7 +10,7 @@
         <sqlFile path="../sql_files/sql_functions.sql" endDelimiter="\nGO" stripComments="false" relativeToChangelogFile="true"/>
     </changeSet>
 
-    <changeSet author="vishnu" id="add missing eventRecords for patients ">
+    <changeSet author="vishnu" id="add missing eventRecords for only patients">
         <preConditions onFail="MARK_RAN">
             <not>
                 <sqlCheck expectedResult="0">
@@ -23,7 +23,8 @@
         <sql>
             INSERT INTO event_records(uuid,title,timestamp,object,uri,category,tags)
             select uuid(),'Patient',now(),CONCAT('/openmrs/ws/rest/v1/patient/',uuid, '?v=full'),NULL,'patient','patient'
-            from person where date_created &lt; (select min(date_created) from event_records where category = 'patient');
+            from person per inner join patient pat on per.person_id = pat.patient_id
+            where pat.date_created &lt; (select min(date_created) from event_records where category = 'patient');
         </sql>
     </changeSet>
 
