@@ -190,7 +190,7 @@
             </sqlCheck>
         </preConditions>
         <sql>
-            update global_property set property_value = 'org.bahmni.module.bahmniOfflineSync.strategy.IDBasedSyncStrategy' where property = 'bahmniOfflineSync.strategy';
+            update global_property set property_value = 'org.bahmni.module.bahmniOfflineSync.strategy.NoPatientSyncStrategy' where property = 'bahmniOfflineSync.strategy';
         </sql>
     </changeSet>
 
@@ -307,19 +307,6 @@
         </preConditions>
         <sql>
             insert into privilege(privilege,description,uuid) values('allowDashboardFormsEdit', 'Allow edit in dashboard forms', '2f460c90-23d1-41ee-86f3-ec9dd3c37f42')
-        </sql>
-    </changeSet>
-
-    <changeSet author="vishnu" id="Delete patient event_records without patient object">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sqlCheck expectedResult="0">
-                    select count(*) from event_records where category = 'patient' and substring(object,29,36) in (select uuid from person where person_id not in (select patient_id from patient));
-                </sqlCheck>
-            </not>
-        </preConditions>
-        <sql>
-            delete from event_records where category = 'patient' and substring(object,29,36) in (select uuid from person where person_id not in (select patient_id from patient));
         </sql>
     </changeSet>
 
