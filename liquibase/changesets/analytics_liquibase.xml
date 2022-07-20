@@ -631,4 +631,15 @@
         </preConditions>
         <sqlFile dbms="postgresql" path="../sql_files/orgunit_tracker.sql" relativeToChangelogFile="true"/>
     </changeSet>
+
+    <changeSet author="vishnu" id="insert general screening mapping">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*)
+                from mapping
+                where program_name = 'General Screening';
+            </sqlCheck>
+        </preConditions>
+        <sqlFile dbms="postgresql" path="../sql_files/general_screening_mappings.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>
