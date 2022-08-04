@@ -205,26 +205,26 @@
             </sqlCheck>
         </preConditions>
         <sql>
-            select insert_form('General Screening Form', '1', 'c55a8765-c40f-4812-91e4-0ee900daddfd');
+            select insert_form('Art initial Visit compulsory Question 1 of 2', '2', 'c77bba7e-79ed-4c75-8162-9c090b1c5676');
             select insert_form('Art initial Visit compulsory Question 2 of 2', '2', '1e7a9c15-b195-40bc-b28f-4243bbc151a2');
-            select insert_form('STI Symptoms', '2', 'e47ff817-9272-488a-b619-abc8f41a4d85');
-            select insert_form('General', '2', 'a2d643fe-e557-4aaf-aa37-ee85663e10b7');
             select insert_form('ART Observations', '2', 'c2ac0e33-3f7f-4391-89ff-0a813d6b860f');
             select insert_form('Assessment and Plan', '2', 'd6ea55f8-cb7a-4261-83ba-4faa9eaecd90');
-            select insert_form('NCD', '2', '929a9c26-49c6-40a9-86bd-439cfacbce17');
-            select insert_form('PrEP Screening Tool', '2', 'c2baa6ea-ef64-42d1-9e04-fe0c83ad8429');
-            select insert_form('TB Screening and History', '2', 'c5d7bf4b-cef3-4ac4-a347-72e4119c0086');
-            select insert_form('Art initial Visit compulsory Question 1 of 2', '2', 'c77bba7e-79ed-4c75-8162-9c090b1c5676');
+            select insert_form('Family Planning Initial', '2', '9534b9b8-e68c-4930-8f4a-c9ac8bf72c72');
+            select insert_form('FP Continuation', '2', 'b5e58c9d-1007-4efd-b27f-455648f5a3cd');
+            select insert_form('FP Counselling Only', '2', '51b2ee80-876e-41a3-8d12-223cfad40482');
+            select insert_form('General', '2', 'a2d643fe-e557-4aaf-aa37-ee85663e10b7');
+            select insert_form('General Screening Form', '1', 'c55a8765-c40f-4812-91e4-0ee900daddfd');
             select insert_form('HIV Self Testing', '2', '0a89eb93-2dd2-4dc6-b53a-f03fe083b32a');
             select insert_form('IPV Form', '2', '36ea1da3-6891-44e1-9c0c-90f35f1f95d4');
+            select insert_form('NCD', '2', 'b7de663a-a5c9-47b3-a256-63249fddde12');
             select insert_form('PrEP Continuation', '2', 'f0d826c1-df5a-4500-91fc-61e520ff10f3');
-            select insert_form('Provider HIV test counselling', '2', 'ea2020d9-f196-45db-bffa-78f570eaaaa6');
-            select insert_form('VIAC Form', '2', '0e4ea5bc-d40c-4a72-9a54-01511fab8113');
-            select insert_form('FP Counselling Only', '2', '51b2ee80-876e-41a3-8d12-223cfad40482');
-            select insert_form('Referrals Template', '2', '81588470-2cfb-4722-af44-a20ff3681f67');
-            select insert_form('FP Continuation', '2', 'b5e58c9d-1007-4efd-b27f-455648f5a3cd');
-            select insert_form('Family Planning Initial', '2', '9534b9b8-e68c-4930-8f4a-c9ac8bf72c72');
             select insert_form('PrEP Initial', '2', '7f8ccf79-12af-4217-80eb-a8f57df7118d');
+            select insert_form('PrEP Screening Tool', '2', 'c2baa6ea-ef64-42d1-9e04-fe0c83ad8429');
+            select insert_form('Provider HIV test counselling', '2', 'ea2020d9-f196-45db-bffa-78f570eaaaa6');
+            select insert_form('Referrals Template', '2', '81588470-2cfb-4722-af44-a20ff3681f67');
+            select insert_form('STI Symptoms', '2', 'e47ff817-9272-488a-b619-abc8f41a4d85');
+            select insert_form('TB Screening and History', '2', '062f282a-95a9-45b9-833b-4c708698f49b');
+            select insert_form('VIAC Form', '2', '0e4ea5bc-d40c-4a72-9a54-01511fab8113');
         </sql>
     </changeSet>
 
