@@ -2,6 +2,7 @@ DROP FUNCTION IF EXISTS insert_form;
 GO
 CREATE FUNCTION insert_form(name varchar(50), version varchar(3), uuid varchar(36))
     RETURNS INT
+    DETERMINISTIC
 BEGIN
 DECLARE inserted_id integer;
 
