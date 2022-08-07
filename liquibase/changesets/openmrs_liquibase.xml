@@ -220,10 +220,10 @@
             select insert_form('PrEP Continuation', '2', 'f0d826c1-df5a-4500-91fc-61e520ff10f3');
             select insert_form('PrEP Initial', '2', '7f8ccf79-12af-4217-80eb-a8f57df7118d');
             select insert_form('PrEP Screening Tool', '2', 'c2baa6ea-ef64-42d1-9e04-fe0c83ad8429');
-            select insert_form('Provider HIV test counselling', '2', 'ea2020d9-f196-45db-bffa-78f570eaaaa6');
+            select insert_form('Provider HIV test counselling', '2', '4771ffef-a855-4a46-9262-ef668bc3bdb8');
             select insert_form('Referrals Template', '2', '81588470-2cfb-4722-af44-a20ff3681f67');
             select insert_form('STI Symptoms', '2', 'e47ff817-9272-488a-b619-abc8f41a4d85');
-            select insert_form('TB Screening and History', '2', '062f282a-95a9-45b9-833b-4c708698f49b');
+            select insert_form('TB Screening and History', '2', '87d21e70-6c62-4469-9f6f-af1a7f9319d0');
             select insert_form('VIAC Form', '2', '0e4ea5bc-d40c-4a72-9a54-01511fab8113');
         </sql>
     </changeSet>
