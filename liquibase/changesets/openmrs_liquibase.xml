@@ -313,5 +313,17 @@
     <changeSet author="vishnu" id = "update get_concept_name function">
         <sqlFile path="../sql_files/updated_get_concept_name.sql" endDelimiter="\nGO" stripComments="false" relativeToChangelogFile="true"/>
     </changeSet>
+
+    <changeSet author="vishnu" id="increase number of search results in bahmni">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                select count(*) from global_property where property = 'webservices.rest.maxResultsDefault';
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            update global_property set property_value = '250' where property = 'webservices.rest.maxResultsDefault';
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
 
