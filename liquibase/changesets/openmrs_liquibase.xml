@@ -216,11 +216,11 @@
             select insert_form('General Screening Form', '1', 'c55a8765-c40f-4812-91e4-0ee900daddfd');
             select insert_form('HIV Self Testing', '2', '0a89eb93-2dd2-4dc6-b53a-f03fe083b32a');
             select insert_form('IPV Form', '2', '36ea1da3-6891-44e1-9c0c-90f35f1f95d4');
-            select insert_form('NCD', '2', 'b7de663a-a5c9-47b3-a256-63249fddde12');
+            select insert_form('NCD', '2', 'f500c0ac-e69e-42c7-8266-ec2a3dc1d72c');
             select insert_form('PrEP Continuation', '2', 'f0d826c1-df5a-4500-91fc-61e520ff10f3');
             select insert_form('PrEP Initial', '2', '7f8ccf79-12af-4217-80eb-a8f57df7118d');
             select insert_form('PrEP Screening Tool', '2', 'c2baa6ea-ef64-42d1-9e04-fe0c83ad8429');
-            select insert_form('Provider HIV test counselling', '2', 'eb0d1040-f5af-4753-a0be-616ca29668a3');
+            select insert_form('Provider HIV test counselling', '2', 'b51b992d-4d4f-4eef-9dcb-39e55171ecf3');
             select insert_form('Referrals Template', '2', '81588470-2cfb-4722-af44-a20ff3681f67');
             select insert_form('STI Symptoms', '2', 'e47ff817-9272-488a-b619-abc8f41a4d85');
             select insert_form('TB Screening and History', '2', '87d21e70-6c62-4469-9f6f-af1a7f9319d0');
