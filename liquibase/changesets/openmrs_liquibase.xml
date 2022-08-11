@@ -220,7 +220,7 @@
             select insert_form('PrEP Continuation', '2', 'f0d826c1-df5a-4500-91fc-61e520ff10f3');
             select insert_form('PrEP Initial', '2', '7f8ccf79-12af-4217-80eb-a8f57df7118d');
             select insert_form('PrEP Screening Tool', '2', 'c2baa6ea-ef64-42d1-9e04-fe0c83ad8429');
-            select insert_form('Provider HIV test counselling', '2', '4771ffef-a855-4a46-9262-ef668bc3bdb8');
+            select insert_form('Provider HIV test counselling', '2', 'eb0d1040-f5af-4753-a0be-616ca29668a3');
             select insert_form('Referrals Template', '2', '81588470-2cfb-4722-af44-a20ff3681f67');
             select insert_form('STI Symptoms', '2', 'e47ff817-9272-488a-b619-abc8f41a4d85');
             select insert_form('TB Screening and History', '2', '87d21e70-6c62-4469-9f6f-af1a7f9319d0');
