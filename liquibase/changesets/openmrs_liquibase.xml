@@ -214,7 +214,7 @@
             select insert_form('FP Counselling Only', '2', '51b2ee80-876e-41a3-8d12-223cfad40482');
             select insert_form('General', '2', 'a2d643fe-e557-4aaf-aa37-ee85663e10b7');
             select insert_form('General Screening Form', '1', 'c55a8765-c40f-4812-91e4-0ee900daddfd');
-            select insert_form('HIV Self Testing', '2', '0a89eb93-2dd2-4dc6-b53a-f03fe083b32a');
+            select insert_form('HIV Self Testing', '2', '4d8458a6-1522-48cc-8f41-8a1b637579e5');
             select insert_form('IPV Form', '2', '36ea1da3-6891-44e1-9c0c-90f35f1f95d4');
             select insert_form('NCD', '2', 'f500c0ac-e69e-42c7-8266-ec2a3dc1d72c');
             select insert_form('PrEP Continuation', '2', 'f0d826c1-df5a-4500-91fc-61e520ff10f3');
