@@ -206,9 +206,9 @@
         </preConditions>
         <sql>
             select insert_form('Art initial Visit compulsory Question 1 of 2', '2', 'c77bba7e-79ed-4c75-8162-9c090b1c5676');
-            select insert_form('Art initial Visit compulsory Question 2 of 2', '2', '8226b240-4478-403b-8f74-6f658dd46713');
+            select insert_form('Art initial Visit compulsory Question 2 of 2', '2', '0ecf8bbd-ab27-43bc-aad7-5b30f882845b');
             select insert_form('ART Observations', '2', 'c2ac0e33-3f7f-4391-89ff-0a813d6b860f');
-            select insert_form('Assessment and Plan', '2', '33c4b7c2-a205-45aa-979b-bf933df71e6d');
+            select insert_form('Assessment and Plan', '2', 'b75af225-6e81-4472-817d-4fa30b0c0d45');
             select insert_form('Family Planning Initial', '2', 'fdf2acf8-a971-47f0-a37b-c5d54d3e5384');
             select insert_form('FP Continuation', '2', 'b5e58c9d-1007-4efd-b27f-455648f5a3cd');
             select insert_form('FP Counselling Only', '2', '51b2ee80-876e-41a3-8d12-223cfad40482');
@@ -217,14 +217,14 @@
             select insert_form('HIV Self Testing', '2', '4d8458a6-1522-48cc-8f41-8a1b637579e5');
             select insert_form('IPV Form', '2', '36ea1da3-6891-44e1-9c0c-90f35f1f95d4');
             select insert_form('NCD', '2', 'f500c0ac-e69e-42c7-8266-ec2a3dc1d72c');
-            select insert_form('PrEP Continuation', '2', '89f64e5d-a54a-40c4-ae58-9fd6d0f9fac7');
+            select insert_form('PrEP Continuation', '2', '72e931bd-4376-42e4-a135-6140a16e8cec');
             select insert_form('PrEP Initial', '2', 'd7395c84-d485-4fd9-8d48-b833ac1dbaec');
             select insert_form('PrEP Screening Tool', '2', 'c2baa6ea-ef64-42d1-9e04-fe0c83ad8429');
             select insert_form('Provider HIV test counselling', '2', '2e08e0e0-e425-4afc-9262-d6e7c2afb68c');
             select insert_form('Referrals Template', '2', '81588470-2cfb-4722-af44-a20ff3681f67');
             select insert_form('STI Symptoms', '2', '556ace9b-26a7-4e1b-849a-71ced0f5fedc');
             select insert_form('TB Screening and History', '2', '7b613f39-a9e6-4167-a504-49a556e6fcb3');
-            select insert_form('VIAC Form', '2', 'e259f19b-deb0-4d66-8d08-c1d49bf33cb8');
+            select insert_form('VIAC Form', '2', '1b7581ba-6b48-41cf-a352-c32f6ea7c97f');
         </sql>
     </changeSet>
 
